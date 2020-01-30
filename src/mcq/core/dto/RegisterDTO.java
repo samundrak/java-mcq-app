@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mcq.dto;
+package mcq.core.dto;
 
 /**
  *
@@ -16,6 +16,9 @@ public class RegisterDTO {
     private String email;
     private String username;
     private String password;
+
+    public RegisterDTO() {
+    }
 
     public RegisterDTO(String firstName, String lastName, String email, String username, String password) {
         this.first_name = firstName;
@@ -64,7 +67,5 @@ public class RegisterDTO {
     public void setUsername(String username) {
         this.username = username;
     }
-    
-    
-    
+
 }
