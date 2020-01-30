@@ -14,6 +14,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
+import javax.swing.JOptionPane;
 import mcq.core.ComboItem;
 import mcq.core.services.Subject;
 import mcq.core.services.QuestionSet;
@@ -31,6 +32,7 @@ public class QuestionSetForm extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         loadSubjects();
+        fullMarks.setText(100 + "");
     }
 
     public void loadSubjects() {
@@ -128,11 +130,18 @@ public class QuestionSetForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveQuestionSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveQuestionSetActionPerformed
-        // TODO add your handling code here:
-        String subject = (String) subjects.getSelectedItem();
-        String questionSetName = this.questionSetName.getText();
-        String fullMarks = this.fullMarks.getText();
-        new QuestionSet().add(subject, questionSetName, fullMarks);
+        try {
+            // TODO add your handling code here:
+            String subject = (String) subjects.getSelectedItem();
+            String questionSetName = this.questionSetName.getText();
+            String fullMarks = this.fullMarks.getText();
+            new QuestionSet().create(subject, questionSetName, fullMarks);
+            JOptionPane.showMessageDialog(this, "New Question set has been created");
+            this.dispose();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionSetForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_saveQuestionSetActionPerformed
 

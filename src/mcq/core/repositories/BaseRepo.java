@@ -29,6 +29,7 @@ abstract class BaseRepo extends DBConnected implements Repository {
                 .getQuery());
     }
 
+    @Override
     public int deleteById(int id) throws SQLException {
         return this.dbq.updateQuery(this.queryBuilder.delete(this.getTableName())
                 .whereRaw("id='" + id + "'")
@@ -44,6 +45,13 @@ abstract class BaseRepo extends DBConnected implements Repository {
         PreparedStatement ps = this.dbConnection.getConnection().prepareStatement(query);
         ps.setMaxRows(1);
         return ps.executeQuery(query);
+    }
+
+    @Override
+    public int create(String[][] columnVals) throws SQLException {
+        String query = this.queryBuilder.insert(this.getTableName(), columnVals).getQuery();
+        System.out.println(query);
+        return this.dbq.updateQuery(query);
     }
 
 }

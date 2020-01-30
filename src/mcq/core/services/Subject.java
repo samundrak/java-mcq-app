@@ -37,8 +37,8 @@ public class Subject extends DBConnected {
         return this.repo.deleteById(id);
     }
     
-    public ResultSet getSubjectIdByName(int id) throws SQLException {
-        ResultSet rs = this.repo.findOne(new String[][]{{"id", "=", id + ""}});
+    public ResultSet getSubjectIdByName(String id) throws SQLException {
+        ResultSet rs = this.repo.findOne(new String[][]{{"name", "=", id + ""}});
         
         return rs;
     }

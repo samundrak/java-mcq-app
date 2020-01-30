@@ -78,7 +78,7 @@ public class QueryBuilder {
 
         for (int i = 0; i < columnsVals.length; i++) {
             columns[i] = columnsVals[i][0];
-            values[i] = columnsVals[i][1];
+            values[i] = "'" + columnsVals[i][1] + "'";
         }
         this.query += "(" + String.join(",", columns) + ")";
         this.query += " values(" + String.join(",", values) + ")";

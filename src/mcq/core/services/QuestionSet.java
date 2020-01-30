@@ -7,19 +7,27 @@ package mcq.core.services;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import mcq.core.interfaces.Repository;
+import mcq.core.repositories.QuestionSetRepo;
 
 /**
  *
  * @author samundra-sage
  */
-public class QuestionSet extends DBConnected {
+public class QuestionSet {
 
-    public int add(String subject, String questionSetName, String marks) throws SQLException {
-        ResultSet subjectRs = new Subject().getSubjectIdByName(Integer.parseInt(subject));
-//        QueryBuilder qb = new QueryBuilder();
-//        qb.insert("question_set", new String[][]{{"full_marks", marks}, {"subject_id", "1"}, {"description", questionSetName}, {"user_id", "" + Session.getInstance().user.getId()}});
-//        System.out.println(qb.getQuery());
+    Repository repo;
 
-        return 1;
+    public QuestionSet() {
+        this.repo = new QuestionSetRepo();
+    }
+
+    public int create(String subject, String questionSetName, String marks) throws SQLException {
+        ResultSet subjectRs = new Subject().getSubjectIdByName(subject);
+        subjectRs.next();
+        int subjectId = subjectRs.getInt("id");
+        return this.repo.create(
+                new String[][]{{"full_marks", marks}, {"subject_id", subjectId + ""}, {"description", questionSetName}, {"user_id", "" + Session.getInstance().user.getId()}}
+        );
     }
 }

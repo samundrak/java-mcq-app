@@ -19,4 +19,6 @@ public interface Repository {
     public int deleteById(int id) throws SQLException;
 
     public ResultSet findOne(String[][] clause) throws SQLException;
+    
+    public int create(String[][] columnVals) throws SQLException;
 }
