@@ -5,6 +5,7 @@
  */
 package mcq.views;
 
+import javax.swing.JOptionPane;
 import mcq.core.controller.AuthController;
 import mcq.core.dto.RegisterDTO;
 
@@ -22,6 +23,9 @@ public class Register extends javax.swing.JFrame {
     public Register() {
         this.controller = new AuthController();
         initComponents();
+        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
     }
 
     /**
@@ -162,6 +166,8 @@ public class Register extends javax.swing.JFrame {
         dto.setLast_name(lName);
         
         this.controller.register(dto);
+        JOptionPane.showMessageDialog(this, "New user created");
+        this.dispose();
     }//GEN-LAST:event_registerActionPerformed
 
     private void firstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameActionPerformed

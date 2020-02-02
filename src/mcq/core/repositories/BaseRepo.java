@@ -44,6 +44,7 @@ abstract class BaseRepo extends DBConnected implements Repository {
                 .getQuery();
         PreparedStatement ps = this.dbConnection.getConnection().prepareStatement(query);
         ps.setMaxRows(1);
+        System.out.println(query);
         return ps.executeQuery(query);
     }
 
@@ -51,6 +52,13 @@ abstract class BaseRepo extends DBConnected implements Repository {
     public int create(String[][] columnVals) throws SQLException {
         String query = this.queryBuilder.insert(this.getTableName(), columnVals).getQuery();
         System.out.println(query);
+        return this.dbq.updateQuery(query);
+    }
+
+    public int update(String[][] columnVals, String[][] whereClause) throws SQLException {
+        String query = this.queryBuilder.update(this.getTableName()).set(columnVals)
+                .where(whereClause)
+                .getQuery();
         return this.dbq.updateQuery(query);
     }
 

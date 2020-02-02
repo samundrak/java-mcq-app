@@ -29,6 +29,7 @@ public class SubjectList extends javax.swing.JFrame {
      */
     public SubjectList() {
         initComponents();
+        setResizable(false);
         this.loadTable();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }

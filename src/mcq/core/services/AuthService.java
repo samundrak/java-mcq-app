@@ -5,7 +5,6 @@
  */
 package mcq.core.services;
 
-import com.mysql.cj.protocol.Resultset;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import mcq.core.Callable;
@@ -42,7 +41,6 @@ public class AuthService extends DBConnected {
         user.setFirst_name(rows.getString("first_name"));
         user.setLast_name(rows.getString("last_name"));
         user.setType(rows.getString("role"));
-
         Session.getInstance().addUser(user);
         callback.run();
     }

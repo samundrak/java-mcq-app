@@ -37,7 +37,7 @@ public class QuestionSetForm extends javax.swing.JFrame {
 
     public void loadSubjects() {
         try {
-            ArrayList<String[]> rs = Utils.resultSetToCollection(new Subject().all());
+            ArrayList<String[]> rs = Utils.resultSetToCollection(new Subject().all(), "name");
 
             Iterator it = rs.iterator();
             while (it.hasNext()) {
@@ -51,7 +51,7 @@ public class QuestionSetForm extends javax.swing.JFrame {
 
     }
 
-    
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

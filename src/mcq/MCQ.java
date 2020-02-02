@@ -31,13 +31,6 @@ public class MCQ {
             DBConnection dBConnection = DBConnection.getInstance();
             Session session = Session.getInstance();
             dBConnection.connect("jdbc:mysql://localhost:3308/mcq?zeroDateTimeBehavior=convertToNull", "root", "root");
-//            DBQuery dBQuery = new DBQuery(dBConnection.getConnection());
-//            ResultSet rs = dBQuery.execQuery("select * from subjects");
-//            
-//            while(rs.next()) {
-//                System.out.println(rs.getString("name"));
-//            }
-//            
             new Login().show();
 
         } catch (ClassNotFoundException ex) {

@@ -16,10 +16,10 @@ import java.util.Vector;
  */
 public class Utils {
 
-    public static ArrayList<String[]> resultSetToCollection(ResultSet rs) throws SQLException {
+    public static ArrayList<String[]> resultSetToCollection(ResultSet rs, String value) throws SQLException {
         ArrayList<String[]> ar = new ArrayList<>();
         while (rs.next()) {
-            ar.add(new String[]{rs.getString("id"), rs.getString("name")});
+            ar.add(new String[]{rs.getString("id"), rs.getString(value)});
         }
         return ar;
     }

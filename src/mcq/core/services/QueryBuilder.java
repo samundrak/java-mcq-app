@@ -19,6 +19,7 @@ public class QueryBuilder {
     private String query = "";
 
     public QueryBuilder select(String[] selections) {
+        this.reset();
         this.query += "select " + String.join(", ", selections);
         return this;
     }
@@ -72,6 +73,7 @@ public class QueryBuilder {
     }
 
     public QueryBuilder insert(String table, String[][] columnsVals) {
+        this.reset();
         this.query += "insert into " + table;
         String[] columns = new String[columnsVals.length];
         String[] values = new String[columnsVals.length];
@@ -87,11 +89,13 @@ public class QueryBuilder {
     }
 
     public QueryBuilder update(String table) {
+        this.reset();
         this.query = "update " + table;
         return this;
     }
 
     public QueryBuilder delete(String table) {
+        this.reset();
         this.query = "delete from " + table;
         return this;
     }

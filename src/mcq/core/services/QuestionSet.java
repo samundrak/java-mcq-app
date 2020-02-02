@@ -7,6 +7,7 @@ package mcq.core.services;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import mcq.core.dto.NewQuestionDto;
 import mcq.core.interfaces.Repository;
 import mcq.core.repositories.QuestionSetRepo;
 
@@ -30,4 +31,15 @@ public class QuestionSet {
                 new String[][]{{"full_marks", marks}, {"subject_id", subjectId + ""}, {"description", questionSetName}, {"user_id", "" + Session.getInstance().user.getId()}}
         );
     }
+
+    public ResultSet getsetIdByName(String id) throws SQLException {
+        ResultSet rs = this.repo.findOne(new String[][]{{"description", "=", id + ""}});
+        return rs;
+    }
+
+    public ResultSet all() throws SQLException {
+        return this.repo.all();
+    }
+
+    
 }
