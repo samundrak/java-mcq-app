@@ -3,21 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mcq.core.repositories;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
+package mcq.core;
 
 /**
  *
  * @author samundra-sage
  */
-public class QuestionOptions extends BaseRepo {
-
-    @Override
-    public String getTableName() {
-        return "question_options";
-    }
-
+public class ExamTracker {
     
 }

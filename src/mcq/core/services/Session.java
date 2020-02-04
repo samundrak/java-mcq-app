@@ -13,6 +13,10 @@ import mcq.core.dto.UserDto;
  */
 public class Session {
 
+    public UserDto getUser() {
+        return user;
+    }
+
     UserDto user;
     public static Session INSTANCE;
 

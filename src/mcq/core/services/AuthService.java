@@ -23,7 +23,7 @@ public class AuthService extends DBConnected {
     String table = "users";
 
     public void createUser(RegisterDTO dTO) throws SQLException {
-        String query = "insert into " + table + "(first_name, last_name, email) values('" + dTO.getFirst_name() + "','" + dTO.getLast_name() + "','" + dTO.getEmail() + "')";
+        String query = "insert into " + table + "(first_name, last_name, email, role) values('" + dTO.getFirst_name() + "','" + dTO.getLast_name() + "','" + dTO.getEmail() + "','student')";
         int update = this.dbq.updateQuery(query);
         System.out.println(update);
     }

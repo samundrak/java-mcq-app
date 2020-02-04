@@ -23,8 +23,8 @@ public class User {
         this.repo = new UserRepo();
     }
 
-    public ResultSet all() throws SQLException {
-        return this.repo.all();
+    public ResultSet find(String[][] clause) throws SQLException {
+        return this.repo.find(clause);
     }
 
     public int update(int userId, String username, String password) throws SQLException {

@@ -30,33 +30,33 @@ public class StudentList extends javax.swing.JFrame {
         setResizable(false);
         loadStudents();
     }
-
+    
     public void loadStudents() {
         try {
             sutdents.removeAll();
             DefaultTableModel dtm = (DefaultTableModel) sutdents.getModel();
             dtm.setRowCount(0);
-
+            
             TableColumn col = new TableColumn();
             dtm.addColumn("ID");
             dtm.addColumn("Name");
             dtm.addColumn("username");
             dtm.addColumn("password");
             this.feedTable();
-
+            
         } catch (Exception ex) {
             Logger.getLogger(SubjectList.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public void feedTable() {
         try {
             DefaultTableModel dtm = (DefaultTableModel) sutdents.getModel();
             dtm.setRowCount(0);
-
-            ResultSet rs = new User().all();
+            
+            ResultSet rs = new User().find(new String[][]{{"role", "=", "student"}});
             int columns = rs.getMetaData().getColumnCount();
-
+            
             while (rs.next()) {
                 Vector v = new Vector();
                 v.add(rs.getInt("id"));
@@ -64,7 +64,7 @@ public class StudentList extends javax.swing.JFrame {
                 v.add(rs.getString("username"));
                 v.add(rs.getString("password"));
                 dtm.addRow(v);
-
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(StudentList.class.getName()).log(Level.SEVERE, null, ex);
@@ -157,7 +157,7 @@ public class StudentList extends javax.swing.JFrame {
             return;
         }
         int id = (int) sutdents.getModel().getValueAt(row, 0);
-
+        
         new StudentQuestionAssign(id).show();
     }//GEN-LAST:event_questionSetBtnActionPerformed
 
@@ -168,7 +168,7 @@ public class StudentList extends javax.swing.JFrame {
             return;
         }
         int id = (int) sutdents.getModel().getValueAt(row, 0);
-
+        
         new CreateUser(id).show();
     }//GEN-LAST:event_createUserBtnActionPerformed
 

@@ -22,6 +22,23 @@ abstract class BaseRepo extends DBConnected implements Repository {
     public abstract String getTableName();
 
     @Override
+    public ResultSet find(String[] selection, String[][] clause) throws SQLException {
+        String query = this.queryBuilder.select(selection)
+                .from(this.getTableName())
+                .where(clause)
+                .getQuery();
+        return this.dbq.execQuery(query);
+    }
+
+    public ResultSet find(String[][] clause) throws SQLException {
+        String query = this.queryBuilder.select(new String[]{"*"})
+                .from(this.getTableName())
+                .where(clause)
+                .getQuery();
+        return this.dbq.execQuery(query);
+    }
+
+    @Override
     public ResultSet all() throws SQLException {
         return this.dbq.execQuery(this.queryBuilder
                 .select(new String[]{"*"})
@@ -44,7 +61,17 @@ abstract class BaseRepo extends DBConnected implements Repository {
                 .getQuery();
         PreparedStatement ps = this.dbConnection.getConnection().prepareStatement(query);
         ps.setMaxRows(1);
-        System.out.println(query);
+        return ps.executeQuery(query);
+    }
+
+    @Override
+    public ResultSet findOne(String[] selection, String[][] clause) throws SQLException {
+        String query = this.queryBuilder.select(selection)
+                .from(this.getTableName())
+                .where(clause)
+                .getQuery();
+        PreparedStatement ps = this.dbConnection.getConnection().prepareStatement(query);
+        ps.setMaxRows(1);
         return ps.executeQuery(query);
     }
 

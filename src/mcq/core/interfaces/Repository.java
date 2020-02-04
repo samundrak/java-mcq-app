@@ -14,9 +14,15 @@ import java.sql.SQLException;
  */
 public interface Repository {
 
+    public ResultSet find(String[] selection, String[][] clause) throws SQLException;
+
+    public ResultSet find(String[][] clause) throws SQLException;
+
     public ResultSet all() throws SQLException;
 
     public int deleteById(int id) throws SQLException;
+
+    public ResultSet findOne(String[] selection, String[][] clause) throws SQLException;
 
     public ResultSet findOne(String[][] clause) throws SQLException;
 

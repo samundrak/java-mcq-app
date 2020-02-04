@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import mcq.core.Callable;
 import mcq.core.controller.AuthController;
 import mcq.core.exceptions.UserNotFoundException;
+import mcq.core.services.Session;
 
 /**
  *
@@ -25,7 +26,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
         setResizable(false);
-
+        
     }
 
     /**
@@ -117,15 +118,22 @@ public class Login extends javax.swing.JFrame {
             String password = passwordInput.getText();
             Login l = this;
             new AuthController().login(username, password, new Callable() {
-
+                
                 @Override
                 public void run() {
                     l.dispose();
                     l.hide();
-                    new AdminDashboard().show();
+                    System.out.println(Session.getInstance().getUser().getType());
+                    if (Session.getInstance().getUser().getType().equals("student")) {
+                        new StudentDashboard().show();
+                        System.out.println("login as student");
+                    } else {
+                        new AdminDashboard().show();
+                        
+                    }
                 }
             });
-
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
                     ex.getMessage());

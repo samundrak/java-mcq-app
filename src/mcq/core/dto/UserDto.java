@@ -10,11 +10,21 @@ package mcq.core.dto;
  * @author samundra-sage
  */
 public class UserDto {
+
     private String first_name;
     private String last_name;
     private String type;
     private String email;
     private int id;
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public int getId() {
         return id;
@@ -56,5 +66,4 @@ public class UserDto {
         this.email = email;
     }
 
-    
 }

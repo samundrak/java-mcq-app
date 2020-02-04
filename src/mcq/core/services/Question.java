@@ -49,4 +49,11 @@ public class Question {
 
         return -1;
     }
+
+    ResultSet getQuestionCountById(int aInt) throws SQLException {
+        ResultSet rs = this.repo.findOne(new String[]{"count(id) as noOfQuestion"}, new String[][]{{"question_set_id", "=", aInt + ""}});
+        rs.next();
+        
+        return rs;
+    }
 }

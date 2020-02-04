@@ -5,19 +5,15 @@
  */
 package mcq.core.repositories;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 /**
  *
  * @author samundra-sage
  */
-public class QuestionOptions extends BaseRepo {
+public class AnswersRepo extends BaseRepo {
 
     @Override
     public String getTableName() {
-        return "question_options";
+        return "answers";
     }
 
-    
 }
