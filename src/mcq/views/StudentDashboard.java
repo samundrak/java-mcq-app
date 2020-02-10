@@ -65,6 +65,11 @@ public class StudentDashboard extends javax.swing.JFrame {
         jScrollPane1.setViewportView(dashTable);
 
         seeReport.setText("See Report");
+        seeReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seeReportActionPerformed(evt);
+            }
+        });
 
         attemptExam.setText("Attempt Exam");
         attemptExam.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +118,23 @@ public class StudentDashboard extends javax.swing.JFrame {
 
     private void attemptExamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_attemptExamActionPerformed
         // TODO add your handling code here:
+        int row = dashTable.getSelectedRow();
+        if (row < -1) {
+            return;
+        }
+        String id = (String) dashTable.getModel().getValueAt(row, 0);
+        new Exam(Integer.parseInt(id)).show();
     }//GEN-LAST:event_attemptExamActionPerformed
+
+    private void seeReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeReportActionPerformed
+        // TODO add your handling code here:
+        int row = dashTable.getSelectedRow();
+        if (row < -1) {
+            return;
+        }
+        String id = (String) dashTable.getModel().getValueAt(row, 0);
+        new ReportCard(Integer.parseInt(id)).show();
+    }//GEN-LAST:event_seeReportActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,6 +188,7 @@ public class StudentDashboard extends javax.swing.JFrame {
             dtm.setRowCount(0);
 
             TableColumn col = new TableColumn();
+            dtm.addColumn(Strings.QUESTION_SET_ID);
             dtm.addColumn(Strings.EXAM_SET_NAME);
             dtm.addColumn(Strings.FULL_MARKS);
             dtm.addColumn(Strings.NO_OF_QUESTIONS);
@@ -179,6 +201,7 @@ public class StudentDashboard extends javax.swing.JFrame {
                 HashMap<String, String> hm = (HashMap<String, String>) it.next();
 
                 Vector v = new Vector();
+                v.add(hm.get(Strings.QUESTION_SET_ID));
                 v.add(hm.get(Strings.EXAM_SET_NAME));
                 v.add(hm.get(Strings.FULL_MARKS));
                 v.add(hm.get(Strings.NO_OF_QUESTIONS));

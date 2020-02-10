@@ -29,5 +29,7 @@ public interface Repository {
     public int create(String[][] columnVals) throws SQLException;
 
     public int update(String[][] columnVals, String[][] whereClause) throws SQLException;
+    
+    public ResultSet raw(String query) throws SQLException;
 
 }

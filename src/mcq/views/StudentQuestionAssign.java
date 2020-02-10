@@ -111,7 +111,7 @@ public class StudentQuestionAssign extends javax.swing.JFrame {
             // TODO add your handling code here:
             String questionSetName = (String) questionSet.getSelectedItem();
             new mcq.core.services.StudentQuestion().create(this.userId, questionSetName);
-            JOptionPane.showConfirmDialog(this, "Student assigned to question set");
+            JOptionPane.showMessageDialog(this, "Student assigned to question set");
             this.dispose();
         } catch (SQLException ex) {
             Logger.getLogger(StudentQuestionAssign.class.getName()).log(Level.SEVERE, null, ex);

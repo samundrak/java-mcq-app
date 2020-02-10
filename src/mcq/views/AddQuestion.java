@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 import mcq.Utils;
 import mcq.core.dto.NewQuestionDto;
 import mcq.core.services.Question;
@@ -27,6 +28,7 @@ public class AddQuestion extends javax.swing.JFrame {
     private String rightAnswer = "";
     private String[] options = new String[]{"A", "B", "C", "D"};
     private JRadioButton[] answerRadios;
+    private JTextField[] answerOptions;
 
     /**
      * Creates new form AddQuestion
@@ -34,6 +36,7 @@ public class AddQuestion extends javax.swing.JFrame {
     public AddQuestion() {
         initComponents();
         answerRadios = new JRadioButton[]{rightAnswerA, rightAnswerB, rightAnswerC, rightAnswerD};
+        answerOptions = new JTextField[]{optionA, optionB, optionC, optionD};
         this.loadQuestionSet();
         setResizable(false);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -47,7 +50,6 @@ public class AddQuestion extends javax.swing.JFrame {
             Iterator it = rs.iterator();
             while (it.hasNext()) {
                 String[] val = (String[]) it.next();
-                System.out.println(val[1]);
                 questionSetCombo.addItem(val[1]);
             }
 
@@ -58,13 +60,15 @@ public class AddQuestion extends javax.swing.JFrame {
     }
 
     private void handleRightAnswer(String selected) {
+        int counter = 0;
         for (JRadioButton option : answerRadios) {
             System.out.println(option.getActionCommand());
             if (option.getText() != selected) {
                 option.setSelected(false);
             } else {
-                rightAnswer = selected;
+                rightAnswer = answerOptions[counter].getText();
             }
+            counter++;
         }
     }
 

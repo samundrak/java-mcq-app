@@ -26,4 +26,11 @@ public class Answers {
         ResultSet rs = this.repo.find(new String[][]{{}});
         return rs;
     }
+
+    public int addAnswerOfQuestionId(int userId, int questionId, int answerId) throws SQLException {
+        return this.repo.create(new String[][]{
+            {"user_id", userId + ""},
+            {"question_id", questionId + ""},
+            {"answer_id", answerId + ""},});
+    }
 }

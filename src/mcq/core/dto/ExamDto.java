@@ -5,20 +5,18 @@
  */
 package mcq.core.dto;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author samundra-sage
  */
 public class ExamDto {
-    
-    QuestionDto question;
 
-    public QuestionDto getQuestion() {
+    ArrayList<QuestionDto> question = new ArrayList<>();
+
+    public ArrayList<QuestionDto> getQuestion() {
         return question;
     }
 
-    public void setQuestion(QuestionDto question) {
-        this.question = question;
-    }
-    
 }

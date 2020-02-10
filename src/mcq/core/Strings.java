@@ -11,6 +11,7 @@ package mcq.core;
  */
 public class Strings {
 
+    public static final String QUESTION_SET_ID = "Question Id";
     public static final String FULL_MARKS = "FULL MARKS";
     public static final String EXAM_SET_NAME = "Exam Set Name";
     public static final String NO_OF_QUESTIONS = "No of Questions";

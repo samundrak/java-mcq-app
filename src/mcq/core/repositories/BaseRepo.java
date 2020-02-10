@@ -89,4 +89,9 @@ abstract class BaseRepo extends DBConnected implements Repository {
         return this.dbq.updateQuery(query);
     }
 
+    @Override
+    public ResultSet raw(String query) throws SQLException {
+        return this.dbq.execQuery(query);
+    }
+
 }

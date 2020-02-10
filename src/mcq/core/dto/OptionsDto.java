@@ -3,15 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mcq.views;
+package mcq.core.dto;
 
-import javax.swing.JFrame;
+import java.util.ArrayList;
 
 /**
  *
  * @author samundra-sage
  */
-public class Test extends JFrame {
-    
-    
+public class OptionsDto {
+
+    ArrayList<OptionDto> options = new ArrayList<OptionDto>();
+
+    public ArrayList<OptionDto> getOptions() {
+        return options;
+    }
+
 }

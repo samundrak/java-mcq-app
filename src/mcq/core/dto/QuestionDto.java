@@ -11,9 +11,36 @@ package mcq.core.dto;
  */
 public class QuestionDto {
 
+    int id;
     String question;
     int mark;
+    String selectedAnswer = "";
     String rightAnswer;
+    OptionsDto options;
+
+    public String getSelectedAnswer() {
+        return selectedAnswer;
+    }
+
+    public void setSelectedAnswer(String selectedAnswer) {
+        this.selectedAnswer = selectedAnswer;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public OptionsDto getOptions() {
+        return options;
+    }
+
+    public void setOptions(OptionsDto options) {
+        this.options = options;
+    }
 
     public String getQuestion() {
         return question;

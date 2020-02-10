@@ -37,6 +37,7 @@ public class Student {
             HashMap<String, String> hm = new HashMap<>();
             Question qr = new Question();
             ResultSet noOfQuestions = qr.getQuestionCountById(rs.getInt("question_set_id"));
+            hm.put(Strings.QUESTION_SET_ID, rs.getString("question_set_id"));
             hm.put(Strings.EXAM_SET_NAME, rs.getString("description"));
             hm.put(Strings.FULL_MARKS, rs.getString("full_marks"));
             hm.put(Strings.NO_OF_QUESTIONS, noOfQuestions.getString("noOfQuestion"));

@@ -20,7 +20,7 @@ public class QuestionOptions {
         this.repo = new mcq.core.repositories.QuestionOptions();
     }
 
-    public int create(String label, int questionId) throws SQLException {
-        return this.repo.create(new String[][]{{"label", label}, {"question_id", questionId + ""}});
+    public int create(String label, int questionId, int isCorrect) throws SQLException {
+        return this.repo.create(new String[][]{{"label", label}, {"is_correct", isCorrect + ""}, {"question_id", questionId + ""}});
     }
 }

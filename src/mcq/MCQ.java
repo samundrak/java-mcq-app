@@ -14,7 +14,6 @@ import mcq.core.services.Session;
 import mcq.views.AdminDashboard;
 import mcq.views.Login;
 import mcq.views.Register;
-import mcq.views.Test;
 
 /**
  *

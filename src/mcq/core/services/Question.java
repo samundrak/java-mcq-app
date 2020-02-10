@@ -42,10 +42,9 @@ public class Question {
         rs.next();
         int questionId = rs.getInt("id");
         for (String option : newQuestion.getOptions()) {
-            new QuestionOptions().create(option, questionId);
+            System.out.println(option + "--" + newQuestion.getRightAnswer());
+            new QuestionOptions().create(option, questionId, option.equals(newQuestion.getRightAnswer()) ? 1 : 0);
         }
-
-        System.out.println(questionSetId);
 
         return -1;
     }
@@ -53,7 +52,7 @@ public class Question {
     ResultSet getQuestionCountById(int aInt) throws SQLException {
         ResultSet rs = this.repo.findOne(new String[]{"count(id) as noOfQuestion"}, new String[][]{{"question_set_id", "=", aInt + ""}});
         rs.next();
-        
+
         return rs;
     }
 }
