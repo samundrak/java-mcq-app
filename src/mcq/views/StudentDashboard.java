@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import mcq.core.Strings;
@@ -123,6 +124,12 @@ public class StudentDashboard extends javax.swing.JFrame {
             return;
         }
         String id = (String) dashTable.getModel().getValueAt(row, 0);
+        String questionAttempted = (String) dashTable.getModel().getValueAt(row, 4);
+        if (Integer.parseInt(questionAttempted) > 0) {
+            JOptionPane.showMessageDialog(this, "You already attempted this exam");
+            return;
+        }
+
         new Exam(Integer.parseInt(id)).show();
     }//GEN-LAST:event_attemptExamActionPerformed
 
@@ -133,6 +140,7 @@ public class StudentDashboard extends javax.swing.JFrame {
             return;
         }
         String id = (String) dashTable.getModel().getValueAt(row, 0);
+
         new ReportCard(Integer.parseInt(id)).show();
     }//GEN-LAST:event_seeReportActionPerformed
 
@@ -193,7 +201,7 @@ public class StudentDashboard extends javax.swing.JFrame {
             dtm.addColumn(Strings.FULL_MARKS);
             dtm.addColumn(Strings.NO_OF_QUESTIONS);
             dtm.addColumn(Strings.QUESTION_ATTEMPTED);
-            dtm.addColumn(Strings.MARKS_OBTAINED);
+//            dtm.addColumn(Strings.MARKS_OBTAINED);
 
             ArrayList<HashMap<String, String>> dash = new Student().getDashContents(user.getId());
             Iterator it = dash.iterator();
@@ -205,7 +213,7 @@ public class StudentDashboard extends javax.swing.JFrame {
                 v.add(hm.get(Strings.EXAM_SET_NAME));
                 v.add(hm.get(Strings.FULL_MARKS));
                 v.add(hm.get(Strings.NO_OF_QUESTIONS));
-//                v.add(hm.get(Strings.QUESTION_ATTEMPTED));
+                v.add(hm.get(Strings.QUESTION_ATTEMPTED));
 
                 dtm.addRow(v);
             }

@@ -23,4 +23,11 @@ public class StudentRepo extends UserRepo {
         return this.dbq.execQuery(query);
     }
 
+    public ResultSet getQuestionSets() throws SQLException {
+        String query = "select * from question_set, users, student_question \n"
+                + "where student_question.student_id = users.id \n"
+                + "and question_set.id =  student_question.question_set_id\n;";
+
+        return this.dbq.execQuery(query);
+    }
 }

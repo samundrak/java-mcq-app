@@ -5,8 +5,20 @@
  */
 package mcq.views;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import mcq.core.Strings;
+import mcq.core.dto.UserDto;
 import mcq.core.services.Session;
+import mcq.core.services.Student;
 
 /**
  *
@@ -21,6 +33,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        this.loadDashContents();
 
     }
 
@@ -35,6 +48,9 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        dashTable = new javax.swing.JTable();
+        reportCard = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -52,6 +68,26 @@ public class AdminDashboard extends javax.swing.JFrame {
         jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        dashTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(dashTable);
+
+        reportCard.setText("See Report");
+        reportCard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportCardActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("Subjects");
 
@@ -123,11 +159,19 @@ public class AdminDashboard extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 936, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 936, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(reportCard)
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 726, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(reportCard)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -159,6 +203,16 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         new StudentList().show();
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void reportCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportCardActionPerformed
+        int row = dashTable.getSelectedRow();
+        if (row < -1) {
+            return;
+        }
+        String id = (String) dashTable.getModel().getValueAt(row, 0);
+
+        new ReportCard(Integer.parseInt(id)).show();
+    }//GEN-LAST:event_reportCardActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,6 +250,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable dashTable;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -209,5 +264,41 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton reportCard;
     // End of variables declaration//GEN-END:variables
+
+    private void loadDashContents() {
+        try {
+            UserDto user = Session.getInstance().getUser();
+            DefaultTableModel dtm = (DefaultTableModel) dashTable.getModel();
+            dtm.setRowCount(0);
+
+            TableColumn col = new TableColumn();
+            dtm.addColumn(Strings.QUESTION_SET_ID);
+            dtm.addColumn(Strings.STUDENT_NAME);
+            dtm.addColumn(Strings.EXAM_SET_NAME);
+            dtm.addColumn(Strings.FULL_MARKS);
+            dtm.addColumn(Strings.NO_OF_QUESTIONS);
+//            dtm.addColumn(Strings.QUESTION_ATTEMPTED);
+
+            ArrayList<HashMap<String, String>> dash = new Student().getDashContentsForAdmin();
+            Iterator it = dash.iterator();
+            while (it.hasNext()) {
+                HashMap<String, String> hm = (HashMap<String, String>) it.next();
+
+                Vector v = new Vector();
+                v.add(hm.get(Strings.QUESTION_SET_ID));
+                v.add(hm.get(Strings.STUDENT_NAME));
+                v.add(hm.get(Strings.EXAM_SET_NAME));
+                v.add(hm.get(Strings.FULL_MARKS));
+                v.add(hm.get(Strings.NO_OF_QUESTIONS));
+
+                dtm.addRow(v);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }

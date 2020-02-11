@@ -17,5 +17,6 @@ public class Strings {
     public static final String NO_OF_QUESTIONS = "No of Questions";
     public static final String QUESTION_ATTEMPTED = "Question Attempted";
     public static final String MARKS_OBTAINED = "Marks Obtained";
+    public static final String STUDENT_NAME = "Student Name";
 
 }
